@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/pranavliag/ember-elements.git",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -22,12 +22,27 @@
     "lint:js:fix": "eslint . --fix",
     "lint:types": "tsc --skipLibCheck --noEmit",
     "lint:js:overide": "yarn eslint . --ext .ts --ext .js",
+    "types:build": "tsc --build",
+    "types:clean": "tsc --build --clean",
+    "types:rebuild": "tsc --build --clean && yarn tsc --build",
+    "types:watch": "tsc --build --clean && yarn tsc --build --watch",
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test",
     "test:ember-compatibility": "ember try:each",
     "prepack": "ember ts:precompile",
     "postpack": "ember ts:clean"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": "yarn eslint --fix --quiet --cache",
+    "*.hbs": "yarn ember-template-lint --fix",
+    "*.css": "yarn stylelint --fix --cache",
+    "*.js": "eslint --cache --fix"
   },
   "dependencies": {
     "ember-cli-babel": "^7.23.0",
@@ -62,6 +77,8 @@
     "@types/htmlbars-inline-precompile": "^1.0.1",
     "@types/qunit": "^2.11.1",
     "@types/rsvp": "^4.0.3",
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.10.1",
@@ -84,14 +101,22 @@
     "ember-try": "^1.4.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-decorator-position": "2.2.27",
     "eslint-plugin-ember": "^10.1.1",
+    "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "husky": "4.3.8",
+    "lint-staged": "11.0.0",
     "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "qunit": "^2.13.0",
     "qunit-dom": "^1.6.0",
+    "sass-lint": "^1.13.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "typescript": "^4.3.4"
   },
   "engines": {
